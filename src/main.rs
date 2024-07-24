@@ -13,7 +13,6 @@ use ecs_task_spawner::app;
 use ecs_task_spawner::config::models::AppConfig;
 use ecs_task_spawner::ecs::models::EcsRepo;
 use ecs_task_spawner::shutdown::shutdown_signal;
-use health::handlers::health;
 use tower::ServiceBuilder;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
