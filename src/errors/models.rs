@@ -1,9 +1,14 @@
 use aws_sdk_ecs::{
     error::{BuildError, SdkError},
-    operation::{register_task_definition::RegisterTaskDefinitionError, run_task::RunTaskError},
+    operation::{
+        describe_tasks::DescribeTasksError, list_tasks::ListTasksError,
+        register_task_definition::RegisterTaskDefinitionError, run_task::RunTaskError,
+    },
 };
 use thiserror::Error;
 
+// TODO: fix dead code warning
+#[allow(dead_code)]
 #[derive(Error, Debug)]
 pub enum AppError {
     #[error("Task spawn error")]
@@ -24,4 +29,12 @@ pub enum AppError {
     RegisterTaskDefinitionError(#[from] SdkError<RegisterTaskDefinitionError>),
     #[error("Run task error")]
     RunTaskError(#[from] SdkError<RunTaskError>),
+    #[error("List task error")]
+    ListTasksError(#[from] SdkError<ListTasksError>),
+    #[error("Describe task error")]
+    DescribeTaskError(#[from] SdkError<DescribeTasksError>),
+    #[error("Cusom error")]
+    CustomError(String),
+    #[error("Unsupport vendor.")]
+    UnsupportedVendor(String),
 }

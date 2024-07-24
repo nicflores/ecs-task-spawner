@@ -20,3 +20,5 @@ tower-http = { version = "0.5.2", features = ["full"] }
 tracing-subscriber = "0.3.18"
 tracing = "0.1.40"
 thiserror = "1.0.61"
+chrono = { version = "0.4.38", features = ["serde"] }
+config = "0.14.0"

@@ -18,6 +18,10 @@ impl AppError {
             AppError::LogConfigurationError(_) => "LOG_CONFIGURATION_ERROR",
             AppError::RegisterTaskDefinitionError(_) => "REGISTER_TASK_DEFINITION_ERROR",
             AppError::RunTaskError(_) => "RUN_TASK_ERROR",
+            AppError::ListTasksError(_) => "LIST_TASKS_ERROR",
+            AppError::DescribeTaskError(_) => "DESCRIBE_TASK_ERROR",
+            AppError::CustomError(_) => "CUSTOM_ERROR",
+            AppError::UnsupportedVendor(_) => "UNSUPPORTED_VENDOR",
         }
     }
 }
@@ -40,6 +44,10 @@ impl IntoResponse for AppError {
                 (StatusCode::INTERNAL_SERVER_ERROR, self.to_string())
             }
             AppError::RunTaskError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::ListTasksError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::DescribeTaskError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::CustomError(_) => (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()),
+            AppError::UnsupportedVendor(_) => (StatusCode::BAD_REQUEST, self.to_string()),
         };
 
         let body = Json(json!({

@@ -15,16 +15,13 @@ provider "aws" {
 variable "vpc_id" {
   description = "The ID of the VPC"
   type        = string
+  default     = "vpc-c251a1a5"
 }
 
 variable "private_subnet_ids" {
   description = "A list of private subnet IDs"
   type        = list(string)
-}
-
-variable "cloudwatch_log_group_name" {
-  description = "The name of the CloudWatch log group"
-  type        = string
+  default     = ["subnet-3fddb067", "subnet-3da8c058", "subnet-a8741382", "subnet-a3abfdd5", "subnet-f9a5f8c4", "subnet-3c74e130"]
 }
 
 # Create a security group for ECS tasks
@@ -97,7 +94,7 @@ resource "aws_iam_role_policy_attachment" "cloudwatch_logs_policy_attachment" {
 
 # Create CloudWatch log group for ECS tasks
 resource "aws_cloudwatch_log_group" "ecs_log_group" {
-  name              = var.cloudwatch_log_group_name
+  name              = "/ecs/test-ecs-cluster"
   retention_in_days = 7
 }
 
